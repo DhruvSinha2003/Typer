@@ -1,0 +1,36 @@
+body{
+    background-color: black;
+    color: white;
+}
+
+
+.word-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 30px;
+    background-color: gray;
+    font-size: 24px;
+    bottom: 50%;
+    position: absolute;
+    -webkit-animation: run 7s linear infinite;
+  }
+  
+  @keyframes run {
+    0% {
+      left: 0;
+    }
+    100% {
+      left: calc(75% - 80px);
+    }
+    
+  }
+  .limit{
+    position: absolute;
+    left:75%;
+    background-color: red;
+    height: 100%;
+    width: 2px;
+  }
+  

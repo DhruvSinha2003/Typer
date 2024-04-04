@@ -6,7 +6,6 @@ const wordList = [
     "orange",
     "grape",
     "pear",
-    // Add more words as needed
   ];
   
   // Function to generate a random integer between min (inclusive) and max (inclusive)
