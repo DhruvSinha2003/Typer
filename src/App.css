@@ -1,75 +1,104 @@
-body{
-    background-color: black;
-    color: white;
+body {
+  background-color: black;
+  color: white;
 }
 
-
 .word-block {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 80px;
-    height: 30px;
-    background-color: gray;
-    font-size: 24px;
-    bottom: 50%;
-    position: absolute;
-    -webkit-animation: run 7s linear infinite;
-  }
-  
-  @keyframes run {
-    0% {
-      left: 0;
-    }
-    100% {
-      left: calc(75% - 80px);
-    }
-    
-  }
-  .limit{
-    position: absolute;
-    left:75%;
-    background-color: red;
-    height: 100%;
-    width: 2px;
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 30px;
+  background-color: gray;
+  font-size: 24px;
+  bottom: 50%;
+  position: absolute;
+  -webkit-animation: run 7s linear infinite;
+}
 
-  .right {
-    position: absolute;
-    left: 75%;
-    height: 100%;
-    width: 25%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+@keyframes run {
+  0% {
+      left: 0;
   }
-  
-  .score {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: gray;
-    width: 90px;
-    height: 120px;
-    border-radius: 30px;
+  100% {
+      left: calc(75% - 80px);
   }
-  
-  .score h3 {
-    margin: 0;
-  }
-  
-  .enter {
-    margin-top: 20px; 
-  }
-  
-  .enter input[type="text"] {
-    
-    width: 200px; 
-    height: 40px; 
-    padding: 5px; 
-    font-size: 16px; 
-  }
-  
+}
+
+.run-animation {
+  animation: run 7s linear infinite;
+}
+
+.limit {
+  position: absolute;
+  left: 75%;
+  background-color: red;
+  height: 100%;
+  width: 2px;
+}
+
+.right {
+  position: absolute;
+  left: 75%;
+  height: 100%;
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.score {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: gray;
+  width: 90px;
+  height: 120px;
+  border-radius: 30px;
+}
+
+.score h3 {
+  margin: 0;
+}
+
+.enter {
+  margin-top: 20px;
+}
+
+.enter input[type="text"] {
+  width: 200px;
+  height: 40px;
+  padding: 5px;
+  font-size: 16px;
+}
+
+.game-over-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.game-over-content {
+  background-color: white;
+  color: black;
+  padding: 2rem;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.game-over-content h2 {
+  margin-top: 0;
+}
+
+.game-over-content button {
+  margin-top: 1rem;
+}
