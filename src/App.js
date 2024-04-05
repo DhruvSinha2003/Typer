@@ -5,15 +5,19 @@ function App() {
     <div className="App">
       <div className="container">
         <div className="left">
-        <div className="word-block">{generateRandomWordList(1)}</div>
+          <div className="word-block">{generateRandomWordList(1)}</div>
         </div>
         <div className="limit"></div>
-        <div className="right">
-          <div className="score">
-            <h3>Score</h3>
-            <h1>0</h1>
+        <div class="right">
+          <div class="score">
+            <div class="score-title">
+              <h3>Score</h3>
+            </div>
+            <div class="score-value">
+              <h1>0</h1>
+            </div>
           </div>
-          <div className="enter">
+          <div class="enter">
             <input type="text" placeholder="Enter the word" />
           </div>
         </div>
