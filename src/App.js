@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import "./App.css";
 
 const { generateRandomWordList } = require("./components/Wordlist");
@@ -17,13 +17,14 @@ const GameOverScreen = ({ score, onTryAgain }) => {
 };
 
 function App() {
-  const [inputValue, setInputValue] = React.useState("");
-  const [currentWord, setCurrentWord] = React.useState(generateRandomWordList(1)[0]);
-  const [score, setScore] = React.useState(0);
+  const [inputValue, setInputValue] = useState("");
+  const [currentWord, setCurrentWord] = useState(generateRandomWordList(1)[0]);
+  const [score, setScore] = useState(0);
   const containerRef = useRef(null);
   const wordBlockRef = useRef(null);
-  const [gameState, setGameState] = React.useState("in-progress");
-  const [shouldResetAnimation, setShouldResetAnimation] = React.useState(false);
+  const [gameState, setGameState] = useState("in-progress");
+  const [shouldResetAnimation, setShouldResetAnimation] = useState(false);
+  const [animationSpeed, setAnimationSpeed] = useState(1); // Initial animation speed
 
   useEffect(() => {
     let intervalId;
@@ -33,20 +34,25 @@ function App() {
         if (
           wordBlockRef.current &&
           containerRef.current &&
-          wordBlockRef.current.offsetLeft >=
-            containerRef.current.getBoundingClientRect().width * 0.75 - wordBlockRef.current.offsetWidth
+          wordBlockRef.current.offsetLeft + wordBlockRef.current.offsetWidth >=
+            containerRef.current.getBoundingClientRect().width * 0.745
         ) {
           console.log("Word-block has reached the limit!");
           setGameState("game-over");
           if (wordBlockRef.current) {
             wordBlockRef.current.style.animationPlayState = "paused"; // Pause the animation
           }
+        } else {
+          // Gradually increase the animation speed
+          if (score > 0 && score % 5 === 0) {
+            setAnimationSpeed((prevSpeed) => prevSpeed * 1.01); // Increase the animation speed by 10%
+          }
         }
       }, 100); // Check the position every 100ms
     }
 
     return () => clearInterval(intervalId);
-  }, [gameState, wordBlockRef, containerRef, shouldResetAnimation]);
+  }, [gameState, wordBlockRef, containerRef, score, shouldResetAnimation]);
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
@@ -56,6 +62,7 @@ function App() {
     setGameState("in-progress");
     setScore(0);
     setCurrentWord(generateRandomWordList(1)[0]);
+    setAnimationSpeed(1); // Reset the animation speed
     if (wordBlockRef.current) {
       wordBlockRef.current.style.left = "0"; // Reset the position of the word-block
       wordBlockRef.current.style.animationPlayState = "running"; // Resume the animation
@@ -101,7 +108,8 @@ function App() {
         <div className="left">
           <div
             ref={wordBlockRef}
-            className="word-block run-animation"
+            className={`word-block run-animation`}
+            style={{ animationDuration: `${7/animationSpeed}s` }}
             onAnimationEnd={handleAnimationEnd}
           >
             {currentWord}
