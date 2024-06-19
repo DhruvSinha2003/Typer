@@ -24,7 +24,7 @@ function App() {
   const wordBlockRef = useRef(null);
   const [gameState, setGameState] = useState("in-progress");
   const [shouldResetAnimation, setShouldResetAnimation] = useState(false);
-  const [animationSpeed, setAnimationSpeed] = useState(1); // Initial animation speed
+  const [animationSpeed, setAnimationSpeed] = useState(1);
 
   useEffect(() => {
     let intervalId;
@@ -40,15 +40,14 @@ function App() {
           console.log("Word-block has reached the limit!");
           setGameState("game-over");
           if (wordBlockRef.current) {
-            wordBlockRef.current.style.animationPlayState = "paused"; // Pause the animation
+            wordBlockRef.current.style.animationPlayState = "paused";
           }
         } else {
-          // Gradually increase the animation speed
           if (score > 0 && score % 5 === 0) {
-            setAnimationSpeed((prevSpeed) => prevSpeed * 1.01); // Increase the animation speed by 10%
+            setAnimationSpeed((prevSpeed) => prevSpeed * 1.01);
           }
         }
-      }, 100); // Check the position every 100ms
+      }, 100);
     }
 
     return () => clearInterval(intervalId);
@@ -109,7 +108,7 @@ function App() {
           <div
             ref={wordBlockRef}
             className={`word-block run-animation`}
-            style={{ animationDuration: `${7/animationSpeed}s` }}
+            style={{ animationDuration: `${7 / animationSpeed}s` }}
             onAnimationEnd={handleAnimationEnd}
           >
             {currentWord}
